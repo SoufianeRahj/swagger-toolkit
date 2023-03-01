@@ -4,7 +4,7 @@ const getModelFromPattern = (pattern) => {
   return pattern.substring(15, pattern.length - 1);
 };
 
-const getDependency = (collection, modelObj) => {
+const getDependency = (modelObj) => {
   const model = JSON.stringify(modelObj);
   const results = model.match(regex);
   if (results) {
@@ -28,7 +28,7 @@ const getAllDependencies = (collection, root) => {
   let newNodes = [];
 
   // first iteration
-  const results = getDependency(collection, collection[root]);
+  const results = getDependency(collection[root]);
   searchedItems.add(root);
   if (results) {
     results.forEach((el) => {
@@ -45,7 +45,7 @@ const getAllDependencies = (collection, root) => {
     for (let node of currentNodes) {
       // only search for dependencies of unsearched items
       if (!searchedItems.has(node)) {
-        const foundNodes = getDependency(collection, collection[node]);
+        const foundNodes = getDependency(collection[node]);
         // add the searched node
         searchedItems.add(node);
         if (foundNodes) {

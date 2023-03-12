@@ -1,4 +1,5 @@
 const fs = require("fs");
+
 const getAllDependencies = require("./match.js");
 
 // read the input swagger

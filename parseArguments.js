@@ -10,7 +10,7 @@ const parseArguments = () => {
   const arguments = process.argv.slice(2);
 
   //validate arguments
-  if (!validateArguments(arguments)) {
+  if (validateArguments(arguments)) {
     return null;
   }
 
@@ -29,35 +29,38 @@ const parseArguments = () => {
   return options;
 };
 
+// helper functions are c style,
+// if good return 0 if not good return 1
+
 const validateArguments = (arguments) => {
   // the number of arguments passed must be even
   if (arguments.length % 2 !== 0) {
     console.error("Invalid number of arguments passed");
-    return null;
+    return 1;
   }
 
   for (let i = 0; i < arguments.length; i++) {
     // validate parameter
     if (i % 2 === 0) {
-      if (!validateParameter(arguments[i])) {
-        return null;
+      if (validateParameter(arguments[i])) {
+        return 1;
       }
     }
   }
-  return 1;
+  return 0;
 };
 
 const validateParameter = (param) => {
   if (param.length < 2) {
     console.error("invalid parameter entered");
-    return null;
+    return 1;
   }
   const paramBegin = param.slice(0, 2);
   if (paramBegin !== "--") {
     console.error("invalid parameter entered");
-    return null;
+    return 1;
   }
-  return 1;
+  return 0;
 };
 
 const result = parseArguments();

@@ -63,7 +63,9 @@ const validateParameter = (param) => {
   return 0;
 };
 
-const result = parseArguments();
-console.log(result);
+// these 2 lines permit to test the content of the file
 
-// module.exports = parseArguments;
+// const result = parseArguments();
+// console.log(result);
+
+module.exports = parseArguments;

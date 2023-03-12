@@ -9,29 +9,32 @@ const validateOptions = (options) => {
     return 1;
   }
 
-  console.log(options.keys);
+  const keys = Object.keys(options);
 
   // for the moment possible to accept one options at a time
-  if (options.keys().length > 1) {
+  if (keys.length > 1) {
     console.error("too many options are passed");
     return 1;
   }
 
   // at this time it is only possible to have one option
-  const option = options.keys();
-  switch (option[0]) {
-    case "extract":
-      return 0;
-    case "model":
-      return 0;
-    default:
-      return 1;
+  const option = keys[0];
+  if (option) {
+    switch (option) {
+      case "extract":
+        return 0;
+      case "model":
+        return 0;
+      default:
+        console.error("no valid option was entered");
+        return 1;
+    }
   }
 };
 
-const options = { test: "test", test2: "value" };
-console.log(options.keys());
+// these 2 lines are helper functions
 
-// validateOptions();
+// const options = { extract: "yes" };
+// console.log(validateOptions(options));
 
 module.exports = validateOptions;

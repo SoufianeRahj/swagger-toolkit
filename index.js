@@ -36,6 +36,7 @@ const main = () => {
   switch (option) {
     case "extract":
       buildSwagger(swaggerObj);
+      return 0;
 
     case "model":
       const model = options.model;
@@ -44,8 +45,10 @@ const main = () => {
         return 1;
       }
       exportModel(model);
+      return 0;
+    default:
+      return 1;
   }
-  return 0;
 };
 
 main();

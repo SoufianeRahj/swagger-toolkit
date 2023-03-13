@@ -17,6 +17,9 @@ const getChildDependencies = (modelObj) => {
   return null;
 };
 
+// get dependencies of a string root inside a collection object
+// the root should be a direct property of the collection
+
 const getAllDependencies = (collection, root) => {
   //contains the list of dependencies for the root model passed
   const dependenciesList = new Set();
@@ -65,4 +68,26 @@ const getAllDependencies = (collection, root) => {
   return dependenciesList;
 };
 
-module.exports = getAllDependencies;
+// get dependencies of a set of string inside a collection object
+// the searched strings should be direct properties of the collection
+
+const getAllDependenciesOfSet = (collection, items) => {
+  //contains the list of dependencies
+  let dependenciesList = new Set();
+
+  // add the items to search in the dependencies set
+  for (let item of items) {
+    const itemDependencies = getAllDependencies(collection, item);
+    for (let dependency of itemDependencies) {
+      dependenciesList.add(dependency);
+    }
+  }
+
+  return dependenciesList;
+};
+
+module.exports = {
+  getAllDependenciesOfSet,
+  getAllDependencies,
+  getChildDependencies,
+};

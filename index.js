@@ -1,8 +1,9 @@
 const fs = require("fs");
 
-const getAllDependencies = require("./match.js");
+const { getAllDependencies } = require("./match.js");
 const validateOptions = require("./utils.js");
 const parseArguments = require("./parseArguments.js");
+const buildSwagger = require("./swaggerBuilder.js");
 
 // read the input swagger
 const swaggerObj = fs.readFileSync("./../swagger-input.json");
@@ -25,14 +26,6 @@ const exportModel = (root) => {
   });
 };
 
-const extractSwagger = () => {
-  console.log("extracting the swagger");
-};
-
-const extractModel = (model) => {
-  exportModel(model);
-};
-
 const main = () => {
   const options = parseArguments();
   if (validateOptions(options)) {
@@ -42,7 +35,7 @@ const main = () => {
   const option = Object.keys(options)[0];
   switch (option) {
     case "extract":
-      extractSwagger();
+      buildSwagger(swaggerObj);
 
     case "model":
       const model = options.model;
@@ -50,7 +43,7 @@ const main = () => {
         console.log("the element entered is not part of the swagger");
         return 1;
       }
-      extractModel(model);
+      exportModel(model);
   }
   return 0;
 };

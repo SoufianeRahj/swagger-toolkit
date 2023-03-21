@@ -12,8 +12,7 @@ A swagger 2.0 model is generated with only the selected endpoints (this comes ha
 with the --model options, it is possible to extract a json file containing the chosen model and all of its dependencies
 
 Possible enhancements: 
-- Add unit tests
-- add an option to input the swagger file
+- Add an option to input the swagger file
 - Support openApi 3.0 as well
 - Add grammar checks (via other existing libraries)
 
